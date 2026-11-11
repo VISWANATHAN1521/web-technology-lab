@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Cake Order Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #be185d; }
+    fieldset { width: 380px; }
+  </style>
+</head>
+<body>
+  <h2>Birthday Cake Order Form</h2>
+  <fieldset>
+    <legend>Order Details</legend>
+    <p>Flavour:
+      <select id="flavour">
+        <option value="450">Vanilla (1 kg) - Rs. 450</option>
+        <option value="600" selected>Chocolate (1 kg) - Rs. 600</option>
+        <option value="750">Red Velvet (1 kg) - Rs. 750</option>
+      </select>
+    </p>
+    <p>Number of cakes: <input type="number" id="qty" value="2" min="1"></p>
+    <p>Add name on cake (Rs. 50): <input type="checkbox" id="nameOn" checked></p>
+    <p>Delivery:
+      <input type="radio" name="delivery" value="0" checked> Pick up
+      <input type="radio" name="delivery" value="80"> Home delivery (Rs. 80)
+    </p>
+    <button onclick="bill()">Get Bill</button>
+  </fieldset>
+  <p id="billArea"></p>
+
+  <script>
+    function bill() {
+      let price = parseInt(document.getElementById("flavour").value);
+      let qty = parseInt(document.getElementById("qty").value);
+      if (isNaN(qty) || qty < 1) {
+        document.getElementById("billArea").innerHTML = "Quantity must be at least 1.";
+        return;
+      }
+      let extra = document.getElementById("nameOn").checked ? 50 : 0;
+      let delivery = parseInt(document.querySelector('input[name="delivery"]:checked').value);
+      let cakeCost = price * qty;
+      let gst = cakeCost * 0.05;
+      let total = cakeCost + extra + delivery + gst;
+      document.getElementById("billArea").innerHTML =
+        "Cake cost: Rs. " + cakeCost +
+        "<br>Name on cake: Rs. " + extra +
+        "<br>Delivery: Rs. " + delivery +
+        "<br>GST (5%): Rs. " + gst.toFixed(2) +
+        "<br><b>Total amount: Rs. " + total.toFixed(2) + "</b>";
+    }
+  </script>
+</body>
+</html>

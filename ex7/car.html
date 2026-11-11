@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Car Workshop</title>
+  <script src="../lib/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; text-align: center; background-color: #f1f5f9; }
+    h2 { color: #334155; }
+    .garage {
+      position: relative;
+      width: 420px;
+      height: 230px;
+      margin: 20px auto;
+      background-color: #e2e8f0;
+      border: 3px solid #64748b;
+    }
+    /* Trapezium shaped glass on top of the body */
+    #glass {
+      position: absolute;
+      left: 120px;
+      top: 40px;
+      width: 180px;
+      height: 60px;
+      background-color: #7dd3fc;
+      clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+    }
+    #body {
+      position: absolute;
+      left: 60px;
+      top: 100px;
+      width: 300px;
+      height: 70px;
+      background-color: #dc2626;
+      border-radius: 15px;
+    }
+    /* Tyres stay attached to the bottom of the body */
+    .tyre {
+      position: absolute;
+      bottom: -30px;
+      width: 60px;
+      height: 60px;
+      background-color: #111827;
+      border: 6px solid #9ca3af;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    #tyre1 { left: 35px; }
+    #tyre2 { right: 35px; }
+    .controls button {
+      margin: 4px;
+      padding: 8px 14px;
+      color: #ffffff;
+      background-color: #334155;
+      border: none;
+      border-radius: 5px;
+    }
+    #reset { background-color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <h2>Car Workshop</h2>
+  <div class="garage">
+    <div id="glass"></div>
+    <div id="body">
+      <div class="tyre" id="tyre1"></div>
+      <div class="tyre" id="tyre2"></div>
+    </div>
+  </div>
+  <p id="status">Body: Red | Glass: Sky Blue | Tyre: 60px</p>
+  <div class="controls">
+    <button id="changeBody">Change Body Color</button>
+    <button id="changeGlass">Change Glass Color</button>
+    <button id="bigTyre">Tyre Size Increase</button>
+    <button id="smallTyre">Tyre Size Decrease</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      let bodyColors = ["#dc2626", "#16a34a", "#2563eb", "#f59e0b", "#7c3aed"];
+      let bodyNames = ["Red", "Green", "Blue", "Yellow", "Purple"];
+      let glassColors = ["#7dd3fc", "#1f2937", "#a7f3d0", "#fde68a"];
+      let glassNames = ["Sky Blue", "Dark Tint", "Mint", "Gold"];
+      let b = 0, g = 0, size = 60;
+
+      function showStatus() {
+        $("#status").text("Body: " + bodyNames[b] + " | Glass: " + glassNames[g] +
+                          " | Tyre: " + size + "px");
+      }
+      function setTyre() {
+        $(".tyre").css({ width: size + "px", height: size + "px", bottom: -(size / 2) + "px" });
+        showStatus();
+      }
+
+      $("#changeBody").click(function () {
+        b = (b + 1) % bodyColors.length;
+        $("#body").css("background-color", bodyColors[b]);
+        showStatus();
+      });
+      $("#changeGlass").click(function () {
+        g = (g + 1) % glassColors.length;
+        $("#glass").css("background-color", glassColors[g]);
+        showStatus();
+      });
+      $("#bigTyre").click(function () {
+        if (size < 80) { size += 5; }
+        setTyre();
+      });
+      $("#smallTyre").click(function () {
+        if (size > 40) { size -= 5; }
+        setTyre();
+      });
+      $("#reset").click(function () {
+        b = 0; g = 0; size = 60;
+        $("#body").css("background-color", bodyColors[0]);
+        $("#glass").css("background-color", glassColors[0]);
+        setTyre();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New User Registration</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f0fdf4; }
+    .box {
+      width: 520px;
+      margin: 30px auto;
+      padding: 20px 30px;
+      background-color: #ffffff;
+      border: 2px solid #16a34a;
+      border-radius: 10px;
+    }
+    h2 { text-align: center; color: #15803d; }
+    label.title { display: inline-block; width: 140px; font-weight: bold; }
+    .req { color: red; }
+    input[type=text], input[type=password], input[type=number], input[type=email], select {
+      width: 240px; padding: 5px; margin: 6px 0;
+    }
+    button {
+      display: block; margin: 15px auto 0 auto; padding: 8px 30px;
+      color: #ffffff; background-color: #16a34a; border: none; border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>New User Registration Form</h2>
+    <form action="/server" method="post" onsubmit="return checkSkills()">
+      <label class="title">Name<span class="req">*</span></label>
+      <input type="text" name="name" required pattern="[A-Za-z .]+" title="Letters only"><br>
+
+      <label class="title">Password<span class="req">*</span></label>
+      <input type="password" name="password" required minlength="8"><br>
+
+      <label class="title">Age<span class="req">*</span></label>
+      <input type="number" name="age" required min="18" max="60"><br>
+
+      <label class="title">Mobile Number<span class="req">*</span></label>
+      <input type="text" name="mobile" required pattern="[6-9][0-9]{9}" title="10 digit mobile number"><br>
+
+      <label class="title">Email<span class="req">*</span></label>
+      <input type="email" name="email" required><br>
+
+      <label class="title">Gender<span class="req">*</span></label>
+      <input type="radio" name="gender" value="Male" required> Male
+      <input type="radio" name="gender" value="Female"> Female<br>
+
+      <label class="title">State<span class="req">*</span></label>
+      <select name="state" required>
+        <option value="">-- Select State --</option>
+        <option>Tamil Nadu</option>
+        <option>Kerala</option>
+        <option>Karnataka</option>
+        <option>Andhra Pradesh</option>
+      </select><br>
+
+      <label class="title">Skills<span class="req">*</span></label>
+      <input type="checkbox" name="skills" value="Python"> Python
+      <input type="checkbox" name="skills" value="JavaScript"> JavaScript
+      <input type="checkbox" name="skills" value="Java"> Java
+      <input type="checkbox" name="skills" value="SQL"> SQL<br>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    // HTML has no "required" option for a group of checkboxes, so check it here
+    function checkSkills() {
+      let boxes = document.querySelectorAll('input[name="skills"]:checked');
+      if (boxes.length === 0) {
+        alert("Please select at least one skill.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>

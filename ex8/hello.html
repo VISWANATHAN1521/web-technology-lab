@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World - AngularJS</title>
+  <script src="../lib/angular-1.6.9.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h1 { color: #dc2626; }
+  </style>
+</head>
+<body ng-app="helloApp" ng-controller="helloCtrl">
+  <h1>{{message}}</h1>
+  <p>Welcome, <b>{{student}}</b> ({{regNo}})</p>
+  <p>Type your name: <input type="text" ng-model="student"></p>
+
+  <script>
+    var app = angular.module("helloApp", []);
+    app.controller("helloCtrl", function ($scope) {
+      $scope.message = "Hello World from AngularJS!";
+      $scope.student = "Viswanathan A R";
+      $scope.regNo = "URK24CS9061";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Coin Flip</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; text-align: center; }
+    h2 { color: #a16207; }
+  </style>
+</head>
+<body>
+  <h2>Flip the Coin</h2>
+  <img id="coinImg" src="images/heads.svg" alt="coin" width="120" height="120">
+  <p id="side">Click the button to flip</p>
+  <button onclick="flipCoin()">Flip Coin</button>
+  <p>Total Flips: <span id="total">0</span></p>
+  <p>Heads: <span id="h">0</span> &nbsp; Tails: <span id="t">0</span></p>
+
+  <script>
+    let heads = 0, tails = 0;
+    function flipCoin() {
+      let value = Math.floor(Math.random() * 2);
+      if (value === 0) {
+        heads++;
+        document.getElementById("coinImg").src = "images/heads.svg";
+        document.getElementById("side").innerHTML = "It is HEADS!";
+      } else {
+        tails++;
+        document.getElementById("coinImg").src = "images/tails.svg";
+        document.getElementById("side").innerHTML = "It is TAILS!";
+      }
+      document.getElementById("h").innerHTML = heads;
+      document.getElementById("t").innerHTML = tails;
+      document.getElementById("total").innerHTML = heads + tails;
+    }
+  </script>
+</body>
+</html>

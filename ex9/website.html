@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FitZone Gym - AngularJS Routing</title>
+  <script src="../lib/angular-1.6.9.min.js"></script>
+  <script src="../lib/angular-route-1.6.9.min.js"></script>
+  <style>
+    body { margin: 0; font-family: "Trebuchet MS", Arial, sans-serif; background-color: #f3f4f6; }
+    header { padding: 15px; text-align: center; color: #ffffff; background-color: #111827; }
+    header h1 { margin: 0; color: #f97316; letter-spacing: 2px; }
+    nav { text-align: center; background-color: #f97316; }
+    nav a { display: inline-block; padding: 10px 22px; color: #ffffff; font-weight: bold; text-decoration: none; }
+    nav a:hover, nav a.active { background-color: #c2410c; }
+    .page {
+      width: 80%;
+      margin: 20px auto;
+      padding: 20px 30px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #d1d5db;
+    }
+    .page h2 { color: #c2410c; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background-color: #111827; color: #ffffff; padding: 8px; }
+    td { padding: 8px; border-bottom: 1px solid #e5e7eb; text-align: center; }
+    .gallery img { width: 200px; height: 130px; margin: 6px; border-radius: 6px; }
+    .gallery figure { display: inline-block; margin: 0; text-align: center; }
+    label { display: inline-block; width: 120px; }
+    input, select { padding: 5px; margin: 5px 0; width: 220px; }
+    footer { text-align: center; padding: 10px; font-size: 13px; color: #6b7280; }
+  </style>
+</head>
+<body ng-app="gymApp" ng-controller="mainCtrl">
+  <header>
+    <h1>FITZONE GYM</h1>
+    <p>Train Smart. Live Strong.</p>
+  </header>
+  <nav>
+    <a href="#!/" ng-class="{active: isActive('/')}">Home</a>
+    <a href="#!/plans" ng-class="{active: isActive('/plans')}">Plans</a>
+    <a href="#!/gallery" ng-class="{active: isActive('/gallery')}">Gallery</a>
+    <a href="#!/contact" ng-class="{active: isActive('/contact')}">Contact</a>
+  </nav>
+
+  <!-- The selected page is loaded here without reloading the application -->
+  <div ng-view></div>
+
+  <footer>FitZone Gym | Viswanathan A R (URK24CS9061) | Web Technology Lab</footer>
+
+  <!-- Page templates -->
+  <script type="text/ng-template" id="home.html">
+    <div class="page">
+      <h2>Welcome to FitZone Gym</h2>
+      <img src="images/logo.svg" alt="FitZone logo" width="300" height="120">
+      <p>FitZone Gym offers modern equipment, certified trainers and friendly
+         batches for students and working people. Start your fitness journey with us today.</p>
+      <p><b>Timings:</b> 5:00 AM to 10:00 PM, all days.</p>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="plans.html">
+    <div class="page">
+      <h2>Membership Plans</h2>
+      <p>Search: <input type="text" ng-model="search" placeholder="Type a plan name"></p>
+      <table>
+        <tr><th>Plan</th><th>Duration</th><th>Fee</th></tr>
+        <tr ng-repeat="p in plans | filter: search">
+          <td>{{p.name}}</td><td>{{p.duration}}</td><td>Rs. {{p.fee}}</td>
+        </tr>
+      </table>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="gallery.html">
+    <div class="page gallery">
+      <h2>Gallery</h2>
+      <figure ng-repeat="g in photos">
+        <img ng-src="images/{{g.file}}" alt="{{g.title}}">
+        <figcaption>{{g.title}}</figcaption>
+      </figure>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="contact.html">
+    <div class="page">
+      <h2>Book a Free Trial</h2>
+      <form name="trialForm" ng-submit="book()">
+        <label>Name</label><input type="text" ng-model="trial.name" required><br>
+        <label>Mobile</label><input type="text" ng-model="trial.mobile" required><br>
+        <label>Plan</label>
+        <select ng-model="trial.plan" ng-options="p.name as p.name for p in plans" required></select><br>
+        <label>Date</label><input type="date" ng-model="trial.date" required><br>
+        <button type="submit" ng-disabled="trialForm.$invalid">Book Now</button>
+      </form>
+      <p ng-show="booked" style="color: green;">Thank you {{trial.name}}, your trial is booked!</p>
+      <p>Address: 12, Gandhi Road, Coimbatore | Phone: 98765 43210</p>
+    </div>
+  </script>
+
+  <script>
+    var app = angular.module("gymApp", ["ngRoute"]);
+
+    app.config(function ($routeProvider) {
+      $routeProvider
+        .when("/", { templateUrl: "home.html" })
+        .when("/plans", { templateUrl: "plans.html" })
+        .when("/gallery", { templateUrl: "gallery.html" })
+        .when("/contact", { templateUrl: "contact.html" })
+        .otherwise({ redirectTo: "/" });
+    });
+
+    app.controller("mainCtrl", function ($scope, $location) {
+      $scope.plans = [
+        { name: "Monthly Basic", duration: "1 Month", fee: 1200 },
+        { name: "Quarterly Fit", duration: "3 Months", fee: 3200 },
+        { name: "Half Yearly Pro", duration: "6 Months", fee: 5800 },
+        { name: "Annual Elite", duration: "12 Months", fee: 10500 },
+        { name: "Student Special", duration: "1 Month", fee: 900 }
+      ];
+      $scope.photos = [
+        { file: "weights.svg", title: "Weight Training" },
+        { file: "cardio.svg", title: "Cardio Zone" },
+        { file: "yoga.svg", title: "Yoga Hall" },
+        { file: "boxing.svg", title: "Boxing Ring" }
+      ];
+      $scope.trial = {};
+      $scope.booked = false;
+      $scope.book = function () {
+        $scope.booked = true;
+      };
+      $scope.isActive = function (path) {
+        return $location.path() === path;
+      };
+    });
+  </script>
+</body>
+</html>

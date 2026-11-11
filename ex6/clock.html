@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Clock</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; text-align: center; }
+    #clock {
+      display: inline-block;
+      padding: 20px 40px;
+      font-family: "Courier New", monospace;
+      font-size: 48px;
+      color: #22c55e;
+      background-color: #111827;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Digital Clock</h2>
+  <div id="clock">00:00:00</div>
+  <p id="today"></p>
+
+  <script>
+    function twoDigits(n) {
+      return n < 10 ? "0" + n : n;
+    }
+    function showTime() {
+      let now = new Date();
+      let h = now.getHours();
+      let m = now.getMinutes();
+      let s = now.getSeconds();
+      let ampm = h >= 12 ? "PM" : "AM";
+      h = h % 12;
+      if (h === 0) {
+        h = 12;
+      }
+      document.getElementById("clock").innerHTML =
+        twoDigits(h) + ":" + twoDigits(m) + ":" + twoDigits(s) + " " + ampm;
+      document.getElementById("today").innerHTML = now.toDateString();
+    }
+    showTime();
+    setInterval(showTime, 1000);
+  </script>
+</body>
+</html>

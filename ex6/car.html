@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Move and Stop the Car</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    #track {
+      position: relative;
+      height: 110px;
+      margin-top: 15px;
+      background-color: #4b5563;
+      border-top: 6px solid #9ca3af;
+      border-bottom: 6px solid #9ca3af;
+      overflow: hidden;
+    }
+    #lane { position: absolute; top: 52px; width: 100%; border-top: 4px dashed #facc15; }
+    #car { position: absolute; left: 0; top: 25px; }
+  </style>
+</head>
+<body>
+  <h2>Car Race Track</h2>
+  <button onclick="startCar()">Start</button>
+  <button onclick="stopCar()">Stop</button>
+  <span id="info">Position: 0 px</span>
+  <div id="track">
+    <div id="lane"></div>
+    <img id="car" src="images/car.svg" alt="Car" width="130" height="65">
+  </div>
+
+  <script>
+    let x = 0;
+    let moveTimer = null;
+    function drive() {
+      let trackWidth = document.getElementById("track").clientWidth;
+      x = x + 6;
+      if (x > trackWidth) {
+        x = -130;
+      }
+      document.getElementById("car").style.left = x + "px";
+      document.getElementById("info").innerHTML = "Position: " + x + " px";
+      moveTimer = setTimeout(drive, 40);
+    }
+    function startCar() {
+      if (moveTimer === null) {
+        drive();
+      }
+    }
+    function stopCar() {
+      clearTimeout(moveTimer);
+      moveTimer = null;
+    }
+  </script>
+</body>
+</html>

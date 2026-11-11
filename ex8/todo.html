@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List - AngularJS</title>
+  <script src="../lib/angular-1.6.9.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #059669; }
+    ul { list-style: none; padding: 0; width: 380px; }
+    li { padding: 8px; margin: 4px 0; background-color: #ecfdf5; border: 1px solid #a7f3d0; }
+    .done { text-decoration: line-through; color: #9ca3af; }
+  </style>
+</head>
+<body ng-app="todoApp" ng-controller="todoCtrl">
+  <h2>My Todo List</h2>
+  <input type="text" ng-model="task" placeholder="Enter a task">
+  <button ng-click="addTask()">Add Task</button>
+  <p>Pending tasks: {{ pending() }} of {{ tasks.length }}</p>
+  <ul>
+    <li ng-repeat="t in tasks">
+      <input type="checkbox" ng-model="t.done">
+      <span ng-class="{done: t.done}">{{ t.name }}</span>
+    </li>
+  </ul>
+
+  <script>
+    var app = angular.module("todoApp", []);
+    app.controller("todoCtrl", function ($scope) {
+      $scope.tasks = [
+        { name: "Complete Web Technology record", done: false },
+        { name: "Revise AngularJS directives", done: true },
+        { name: "Practice Node.js program", done: false }
+      ];
+      $scope.task = "";
+      $scope.addTask = function () {
+        if ($scope.task.trim() !== "") {
+          $scope.tasks.push({ name: $scope.task, done: false });
+          $scope.task = "";
+        }
+      };
+      $scope.pending = function () {
+        var count = 0;
+        angular.forEach($scope.tasks, function (t) {
+          if (!t.done) {
+            count++;
+          }
+        });
+        return count;
+      };
+    });
+  </script>
+</body>
+</html>

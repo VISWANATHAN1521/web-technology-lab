@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shortest and Longest Word</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #1d4ed8; }
+  </style>
+</head>
+<body>
+  <h2>Find the Shortest and Longest Word</h2>
+  <textarea id="text" rows="3" cols="45">Machine learning helps computers learn from data</textarea><br><br>
+  <button onclick="checkWords()">Check</button>
+  <p id="output"></p>
+
+  <script>
+    function checkWords() {
+      let sentence = document.getElementById("text").value.trim();
+      if (sentence === "") {
+        document.getElementById("output").innerHTML = "Enter a sentence first.";
+        return;
+      }
+      let words = sentence.split(" ");
+      let small = words[0];
+      let big = words[0];
+      for (let word of words) {
+        if (word.length < small.length) {
+          small = word;
+        }
+        if (word.length > big.length) {
+          big = word;
+        }
+      }
+      document.getElementById("output").innerHTML =
+        "Total words: " + words.length +
+        "<br>Shortest word: <b>" + small + "</b> (" + small.length + " letters)" +
+        "<br>Longest word: <b>" + big + "</b> (" + big.length + " letters)";
+    }
+  </script>
+</body>
+</html>

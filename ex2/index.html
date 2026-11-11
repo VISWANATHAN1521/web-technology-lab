@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viswanathan A R - Workshop Registration</title>
+</head>
+<body>
+  <!-- Heading -->
+  <h1>Viswanathan A R</h1>
+  <p>Reg. No: URK24CS9061 | B.Tech CSE (AI and ML) | Karunya Institute of Technology and Sciences</p>
+  <hr>
+
+  <!-- Progress elements -->
+  <h2>My Skill Progress</h2>
+  <div>
+    <p>Python: <progress value="85" max="100"></progress> 85%</p>
+    <p>Machine Learning: <progress value="70" max="100"></progress> 70%</p>
+    <p>Web Development: <progress value="60" max="100"></progress> 60%</p>
+  </div>
+  <hr>
+
+  <!-- Audio and video elements -->
+  <h2>Workshop Media</h2>
+  <h3>Audio Clip</h3>
+  <audio controls>
+    <source src="media/beep.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <h3>Video Clip</h3>
+  <video width="320" height="180" controls>
+    <source src="media/demo.mp4" type="video/mp4">
+    Your browser does not support the video element.
+  </video>
+  <hr>
+
+  <!-- Table -->
+  <h2>Workshop Schedule</h2>
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>Day</th>
+      <th>Session</th>
+      <th>Time</th>
+    </tr>
+    <tr>
+      <td>Day 1</td>
+      <td>HTML5 Forms</td>
+      <td>10:00 AM</td>
+    </tr>
+    <tr>
+      <td>Day 2</td>
+      <td>Audio and Video</td>
+      <td>02:00 PM</td>
+    </tr>
+  </table>
+  <hr>
+
+  <!-- Registration form -->
+  <h2>Workshop Registration Form</h2>
+  <form action="#" method="get">
+    <fieldset>
+      <legend>Participant Details</legend>
+      <label for="pname">Full Name:</label>
+      <input type="text" id="pname" name="pname" placeholder="Enter your name" required><br><br>
+
+      <label for="pass">Password:</label>
+      <input type="password" id="pass" name="pass" maxlength="12" required><br><br>
+
+      <label for="reg">Register Number:</label>
+      <input type="text" id="reg" name="reg" value="URK24CS9061"
+             pattern="URK[0-9]{2}[A-Z]{2}[0-9]{4}" required><br><br>
+
+      <label for="year">Year of Study:</label>
+      <input type="number" id="year" name="year" min="1" max="4" required><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br><br>
+
+      <label>Gender:</label>
+      <input type="radio" id="male" name="gender" value="male">
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label><br><br>
+
+      <label for="dept">Department:</label>
+      <select id="dept" name="dept">
+        <option value="aiml">CSE (AI and ML)</option>
+        <option value="cse">CSE</option>
+        <option value="ece">ECE</option>
+      </select><br><br>
+
+      <label for="why">Why do you want to join?</label><br>
+      <textarea id="why" name="why" rows="3" cols="35"></textarea><br><br>
+
+      <input type="checkbox" id="agree" name="agree" required>
+      <label for="agree">I agree to attend all the sessions</label><br><br>
+
+      <input type="submit" value="Register">
+      <input type="reset" value="Clear">
+    </fieldset>
+  </form>
+  <hr>
+
+  <!-- Embed and iframe -->
+  <h2>Workshop Syllabus</h2>
+  <embed src="media/syllabus.pdf" type="application/pdf" width="420" height="260">
+  <h2>Club Page</h2>
+  <iframe src="../ex1/index.html" width="420" height="260" title="AI and ML Club page"></iframe>
+
+  <!-- Footer -->
+  <footer>
+    <hr>
+    <p>&copy; 2026 Viswanathan A R | Web Technology Lab</p>
+  </footer>
+</body>
+</html>

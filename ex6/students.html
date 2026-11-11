@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array of Student Objects</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    table { border-collapse: collapse; margin-bottom: 15px; }
+    th, td { border: 1px solid #555; padding: 6px 12px; }
+    th { background-color: #dbeafe; }
+  </style>
+</head>
+<body>
+  <h2>Student Records</h2>
+  <h3>Students born before the year 2000</h3>
+  <table id="older">
+    <tr><th>Name</th><th>Register No.</th><th>Year of Birth</th></tr>
+  </table>
+  <h3>Students born in or after the year 2000</h3>
+  <table id="younger">
+    <tr><th>Name</th><th>Register No.</th><th>Year of Birth</th></tr>
+  </table>
+
+  <script>
+    // Sample student data stored as an array of objects
+    let students = [
+      { name: "Arun", regNo: "REG101", year: 1997 },
+      { name: "Divya", regNo: "REG102", year: 2003 },
+      { name: "Karthik", regNo: "REG103", year: 1999 },
+      { name: "Meena", regNo: "REG104", year: 2005 },
+      { name: "Rahul", regNo: "REG105", year: 2001 }
+    ];
+
+    for (let i = 0; i < students.length; i++) {
+      let row = "<tr><td>" + students[i].name + "</td><td>" +
+                students[i].regNo + "</td><td>" + students[i].year + "</td></tr>";
+      if (students[i].year < 2000) {
+        document.getElementById("older").innerHTML += row;
+      } else {
+        document.getElementById("younger").innerHTML += row;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculator - AngularJS</title>
+  <script src="../lib/angular-1.6.9.min.js"></script>
+  <script src="calculator.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    .calc {
+      width: 320px;
+      padding: 20px;
+      background-color: #1f2937;
+      color: #ffffff;
+      border-radius: 12px;
+    }
+    input, select { width: 90%; padding: 6px; margin: 6px 0; }
+    .answer { font-size: 24px; color: #facc15; }
+  </style>
+</head>
+<body ng-app="calcApp" ng-controller="calcCtrl">
+  <div class="calc">
+    <h2>Simple Calculator</h2>
+    First Number: <input type="number" ng-model="a">
+    Operator:
+    <select ng-model="op">
+      <option value="+">Addition (+)</option>
+      <option value="-">Subtraction (-)</option>
+      <option value="*">Multiplication (*)</option>
+      <option value="/">Division (/)</option>
+      <option value="%">Modulus (%)</option>
+    </select>
+    Second Number: <input type="number" ng-model="b">
+    <p>{{a}} {{op}} {{b}} = <span class="answer">{{ result() }}</span></p>
+  </div>
+</body>
+</html>

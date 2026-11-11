@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Converter</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #1d4ed8; }
+  </style>
+</head>
+<body>
+  <h2>Currency Converter</h2>
+  <p>Amount: <input type="number" id="amt" value="250"></p>
+  <p>From:
+    <select id="from">
+      <option value="1">Indian Rupee (INR)</option>
+      <option value="88">US Dollar (USD)</option>
+      <option value="102">Euro (EUR)</option>
+    </select>
+    To:
+    <select id="to">
+      <option value="1">Indian Rupee (INR)</option>
+      <option value="88" selected>US Dollar (USD)</option>
+      <option value="102">Euro (EUR)</option>
+    </select>
+  </p>
+  <p><small>Sample rates: 1 USD = Rs. 88, 1 EUR = Rs. 102</small></p>
+  <button onclick="convertMoney()">Convert</button>
+  <h3 id="answer"></h3>
+
+  <script>
+    function convertMoney() {
+      let amount = parseFloat(document.getElementById("amt").value);
+      let fromRate = parseFloat(document.getElementById("from").value);
+      let toRate = parseFloat(document.getElementById("to").value);
+      let fromName = document.getElementById("from").selectedOptions[0].text;
+      let toName = document.getElementById("to").selectedOptions[0].text;
+      if (isNaN(amount) || amount < 0) {
+        document.getElementById("answer").innerHTML = "Enter a valid amount.";
+        return;
+      }
+      let rupees = amount * fromRate;
+      let result = rupees / toRate;
+      document.getElementById("answer").innerHTML =
+        amount + " " + fromName + " = " + result.toFixed(2) + " " + toName;
+    }
+  </script>
+</body>
+</html>

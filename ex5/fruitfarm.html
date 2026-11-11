@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fruit Farm</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #15803d; }
+    #field { margin-top: 15px; padding: 10px; display: inline-block; background-color: #dcfce7; }
+  </style>
+</head>
+<body>
+  <h2>Fruit Farm</h2>
+  <p>Number of rows: <input type="number" id="r" value="4" min="1" max="8"></p>
+  <p>Number of columns: <input type="number" id="c" value="6" min="1" max="8"></p>
+  <button onclick="plant()">Plant Trees</button>
+  <p id="count"></p>
+  <div id="field"></div>
+
+  <script>
+    function plant() {
+      let rows = parseInt(document.getElementById("r").value);
+      let cols = parseInt(document.getElementById("c").value);
+      let html = "";
+      let apples = 0;
+      let oranges = 0;
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+          if (Math.random() < 0.5) {
+            html += '<img src="images/apple.svg" alt="apple" width="45" height="45">';
+            apples++;
+          } else {
+            html += '<img src="images/orange.svg" alt="orange" width="45" height="45">';
+            oranges++;
+          }
+        }
+        html += "<br>";
+      }
+      document.getElementById("field").innerHTML = html;
+      document.getElementById("count").innerHTML =
+        "Apples: " + apples + " | Oranges: " + oranges;
+    }
+  </script>
+</body>
+</html>

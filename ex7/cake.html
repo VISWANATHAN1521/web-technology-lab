@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cake Shop</title>
+  <script src="../lib/jquery-3.6.0.min.js"></script>
+  <style>
+    body { margin: 0; font-family: Verdana, sans-serif; background-color: #fdf2f8; }
+    header {
+      padding: 12px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 26px;
+      letter-spacing: 3px;
+      background-color: #9d174d;
+    }
+    .cakes { text-align: center; margin: 20px 0; }
+    .cake {
+      display: inline-block;
+      width: 170px;
+      margin: 8px;
+      padding: 8px;
+      background-color: #ffffff;
+      border: 2px solid #f9a8d4;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .cake img { width: 160px; height: 130px; }
+    .order {
+      width: 420px;
+      margin: 0 auto 30px auto;
+      padding: 15px 25px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #f472b6;
+    }
+    .order h2 { color: #9d174d; text-align: center; }
+    .order label { display: block; margin-top: 8px; font-weight: bold; color: #831843; }
+    .order input { width: 100%; padding: 5px; }
+    #placeOrder {
+      display: block;
+      margin: 15px auto;
+      padding: 8px 25px;
+      color: #ffffff;
+      background-color: #db2777;
+      border: none;
+      border-radius: 5px;
+    }
+    .bill { text-align: center; border-top: 2px dashed #f472b6; padding-top: 10px; }
+    #amount { font-size: 22px; font-weight: bold; color: #be123c; }
+  </style>
+</head>
+<body>
+  <header>SWEET SPOT CAKE SHOP</header>
+
+  <div class="cakes">
+    <div class="cake"><img src="images/strawberry.svg" alt="Strawberry Cake"><br>Strawberry Cake - Rs. 320</div>
+    <div class="cake"><img src="images/chocolate.svg" alt="Chocolate Truffle"><br>Chocolate Truffle - Rs. 450</div>
+    <div class="cake"><img src="images/butterscotch.svg" alt="Butterscotch Cake"><br>Butterscotch Cake - Rs. 380</div>
+    <div class="cake"><img src="images/pineapple.svg" alt="Pineapple Cake"><br>Pineapple Cake - Rs. 300</div>
+  </div>
+
+  <div class="order">
+    <h2>Order Your Cake</h2>
+    <label for="q1">Strawberry Cake (Quantity)</label>
+    <input type="number" id="q1" min="0" value="1">
+    <label for="q2">Chocolate Truffle (Quantity)</label>
+    <input type="number" id="q2" min="0" value="2">
+    <label for="q3">Butterscotch Cake (Quantity)</label>
+    <input type="number" id="q3" min="0" value="0">
+    <label for="q4">Pineapple Cake (Quantity)</label>
+    <input type="number" id="q4" min="0" value="1">
+    <button type="button" id="placeOrder">Place Order</button>
+    <div class="bill">
+      <h3>Purchase Order Bill</h3>
+      <p id="items">Total cakes: 0</p>
+      <span id="amount">Rs.0</span>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#placeOrder").click(function () {
+        let prices = [320, 450, 380, 300];
+        let ids = ["#q1", "#q2", "#q3", "#q4"];
+        let total = 0;
+        let count = 0;
+        for (let i = 0; i < ids.length; i++) {
+          let qty = Number($(ids[i]).val());
+          if (qty < 0 || !Number.isInteger(qty)) {
+            alert("Please enter valid quantities.");
+            return;
+          }
+          total = total + qty * prices[i];
+          count = count + qty;
+        }
+        $("#items").text("Total cakes: " + count);
+        $("#amount").text("Rs." + total);
+      });
+    });
+  </script>
+</body>
+</html>

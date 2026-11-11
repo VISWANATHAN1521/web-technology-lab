@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Font Size on Mouse Events</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    #msg { font-size: 18px; color: #7c3aed; border: 2px dashed #7c3aed; padding: 15px; width: 520px; }
+  </style>
+</head>
+<body>
+  <h2>Change Font Size Using Mouse Events</h2>
+  <p>Move the mouse over the box to enlarge the text, and move it out to make it normal again.</p>
+  <p id="msg" onmouseover="bigFont()" onmouseout="normalFont()">
+    Web Technology Lab - Viswanathan A R
+  </p>
+  <p id="status">Status: Normal (18px)</p>
+
+  <script>
+    function bigFont() {
+      document.getElementById("msg").style.fontSize = "32px";
+      document.getElementById("status").innerHTML = "Status: Mouse Over (32px)";
+    }
+    function normalFont() {
+      document.getElementById("msg").style.fontSize = "18px";
+      document.getElementById("status").innerHTML = "Status: Mouse Out (18px)";
+    }
+  </script>
+</body>
+</html>

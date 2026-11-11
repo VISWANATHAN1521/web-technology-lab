@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #1d4ed8; }
+  </style>
+</head>
+<body>
+  <h2>Body Mass Index (BMI) Calculator</h2>
+  <p>Weight (kg): <input type="number" id="kg" value="64"></p>
+  <p>Height (m): <input type="number" id="m" value="1.72" step="0.01"></p>
+  <button onclick="findBMI()">Find BMI</button>
+  <h3 id="bmi"></h3>
+  <p id="category"></p>
+
+  <script>
+    function findBMI() {
+      let weight = parseFloat(document.getElementById("kg").value);
+      let height = parseFloat(document.getElementById("m").value);
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        document.getElementById("bmi").innerHTML = "Invalid input";
+        document.getElementById("category").innerHTML = "";
+        return;
+      }
+      let bmi = weight / (height * height);
+      let category = "";
+      if (bmi < 18.5) {
+        category = "Underweight";
+      } else if (bmi < 25) {
+        category = "Normal weight";
+      } else if (bmi < 30) {
+        category = "Overweight";
+      } else {
+        category = "Obese";
+      }
+      document.getElementById("bmi").innerHTML = "Your BMI is " + bmi.toFixed(2);
+      document.getElementById("category").innerHTML = "Category: " + category;
+    }
+  </script>
+</body>
+</html>

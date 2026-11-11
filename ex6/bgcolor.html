@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Colour Changer</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; text-align: center; }
+    #box { display: inline-block; padding: 15px 30px; background-color: #ffffff; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <h2>Background Changes Every 30 Seconds</h2>
+    <p>Current colour: <b id="colorName"></b></p>
+    <p>Next change in <span id="left">30</span> seconds</p>
+  </div>
+
+  <script>
+    let seconds = 30;
+    function randomColor() {
+      let r = Math.floor(Math.random() * 256);
+      let g = Math.floor(Math.random() * 256);
+      let b = Math.floor(Math.random() * 256);
+      return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+    function changeColor() {
+      let color = randomColor();
+      document.body.style.backgroundColor = color;
+      document.getElementById("colorName").innerHTML = color;
+      seconds = 30;
+    }
+    function countDown() {
+      seconds--;
+      document.getElementById("left").innerHTML = seconds;
+    }
+    changeColor();
+    setInterval(changeColor, 30000);
+    setInterval(countDown, 1000);
+  </script>
+</body>
+</html>

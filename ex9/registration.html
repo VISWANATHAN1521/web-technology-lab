@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Registration Form - AngularJS Validation</title>
+  <script src="../lib/angular-1.6.9.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #eef2ff; margin: 0; padding: 25px; }
+    .form-box {
+      width: 520px;
+      margin: auto;
+      padding: 20px 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px #a5b4fc;
+    }
+    h2 { text-align: center; color: #3730a3; }
+    .field { margin-bottom: 12px; }
+    .title { display: inline-block; width: 140px; font-weight: bold; color: #312e81; }
+    .req { color: #dc2626; }
+    input[type=text], input[type=password], input[type=number], input[type=email], select {
+      width: 230px; padding: 5px;
+    }
+    .error { display: block; margin-left: 144px; font-size: 13px; color: #dc2626; }
+    input.ng-invalid.ng-touched { border: 2px solid #dc2626; }
+    input.ng-valid.ng-dirty { border: 2px solid #16a34a; }
+    button { display: block; margin: 15px auto 0 auto; padding: 8px 30px; }
+    .success { text-align: center; color: #16a34a; font-weight: bold; }
+  </style>
+</head>
+<body ng-app="regApp" ng-controller="regCtrl">
+  <div class="form-box">
+    <h2>User Registration Form</h2>
+    <form name="regForm" novalidate ng-submit="submitForm()">
+
+      <div class="field">
+        <label class="title">Name<span class="req">*</span></label>
+        <input type="text" name="name" ng-model="user.name" required ng-pattern="/^[A-Za-z .]+$/">
+        <span class="error" ng-show="show(regForm.name) && regForm.name.$error.required">Name is required</span>
+        <span class="error" ng-show="show(regForm.name) && regForm.name.$error.pattern">Name should contain only letters</span>
+      </div>
+
+      <div class="field">
+        <label class="title">Password<span class="req">*</span></label>
+        <input type="password" name="password" ng-model="user.password" required
+               ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%!]).{8,}$/">
+        <span class="error" ng-show="show(regForm.password) && regForm.password.$error.required">Password is required</span>
+        <span class="error" ng-show="show(regForm.password) && regForm.password.$error.pattern">Min 8 characters with upper case, lower case, digit and symbol</span>
+      </div>
+
+      <div class="field">
+        <label class="title">Age<span class="req">*</span></label>
+        <input type="number" name="age" ng-model="user.age" required min="18" max="35">
+        <span class="error" ng-show="show(regForm.age) && regForm.age.$error.required">Age is required</span>
+        <span class="error" ng-show="show(regForm.age) && (regForm.age.$error.min || regForm.age.$error.max)">Age must be between 18 and 35</span>
+      </div>
+
+      <div class="field">
+        <label class="title">Mobile Number<span class="req">*</span></label>
+        <input type="text" name="mobile" ng-model="user.mobile" required ng-pattern="/^[6-9][0-9]{9}$/">
+        <span class="error" ng-show="show(regForm.mobile) && regForm.mobile.$error.required">Mobile number is required</span>
+        <span class="error" ng-show="show(regForm.mobile) && regForm.mobile.$error.pattern">Enter a valid 10 digit mobile number</span>
+      </div>
+
+      <div class="field">
+        <label class="title">Email<span class="req">*</span></label>
+        <input type="email" name="email" ng-model="user.email" required>
+        <span class="error" ng-show="show(regForm.email) && regForm.email.$error.required">Email is required</span>
+        <span class="error" ng-show="show(regForm.email) && regForm.email.$error.email">Enter a valid email address</span>
+      </div>
+
+      <div class="field">
+        <label class="title">Gender<span class="req">*</span></label>
+        <input type="radio" name="gender" ng-model="user.gender" value="Male" required> Male
+        <input type="radio" name="gender" ng-model="user.gender" value="Female" required> Female
+        <span class="error" ng-show="submitted && !user.gender">Gender is required</span>
+      </div>
+
+      <div class="field">
+        <label class="title">State<span class="req">*</span></label>
+        <select name="state" ng-model="user.state" required>
+          <option value="">-- Select State --</option>
+          <option>Tamil Nadu</option>
+          <option>Kerala</option>
+          <option>Karnataka</option>
+          <option>Andhra Pradesh</option>
+          <option>Telangana</option>
+        </select>
+        <span class="error" ng-show="show(regForm.state) && regForm.state.$error.required">Please select a state</span>
+      </div>
+
+      <button type="submit" ng-disabled="regForm.$invalid">Submit</button>
+      <p class="success" ng-show="done">Registration successful! Welcome, {{user.name}}.</p>
+    </form>
+  </div>
+
+  <script>
+    var app = angular.module("regApp", []);
+    app.controller("regCtrl", function ($scope) {
+      $scope.user = {};
+      $scope.submitted = false;
+      $scope.done = false;
+      $scope.show = function (field) {
+        return field.$touched || field.$dirty || $scope.submitted;
+      };
+      $scope.submitForm = function () {
+        $scope.submitted = true;
+        if ($scope.regForm.$valid) {
+          $scope.done = true;
+        }
+      };
+    });
+  </script>
+</body>
+</html>

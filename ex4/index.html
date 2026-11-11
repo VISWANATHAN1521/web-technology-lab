@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Book Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: linear-gradient(to bottom, #fff7ed, #fed7aa);
+    }
+
+    /* Multiple backgrounds and background-size */
+    header {
+      height: 170px;
+      padding: 20px 40px;
+      color: #ffffff;
+      background-image: url("images/books.svg"), url("images/dots.svg"),
+                        linear-gradient(135deg, #7c2d12, #c2410c);
+      background-position: right 40px center, left top, center;
+      background-repeat: no-repeat, repeat, no-repeat;
+      background-size: 180px 135px, 30px 30px, cover;
+    }
+    header h1 {
+      margin: 20px 0 5px 0;
+      font-size: 40px;
+      text-shadow: 3px 3px 6px #000000;
+    }
+
+    .main {
+      width: 90%;
+      margin: 25px auto;
+    }
+
+    /* Rounded corners and shadows */
+    .category {
+      display: inline-block;
+      width: 28%;
+      margin: 10px 1.5%;
+      background-color: #ffffff;
+      border-radius: 15px 50px 15px 50px;
+      box-shadow: 6px 6px 12px #9a3412;
+      overflow: hidden;
+      text-align: center;
+      vertical-align: top;
+    }
+    .category img {
+      width: 100%;
+      height: 110px;
+    }
+    .category h3 {
+      color: #7c2d12;
+    }
+
+    /* Adjacent sibling selector and opacity */
+    .category img + h3 {
+      margin: 8px 0 12px 0;
+    }
+    .category:hover {
+      opacity: 0.6;
+    }
+
+    /* Border image */
+    .offer {
+      margin: 25px 1.5%;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      border: 25px solid transparent;
+      border-image: url("images/border.svg") 30 round;
+      background: radial-gradient(circle, #ffffff, #ffedd5);
+    }
+
+    .row {
+      display: flex;
+      gap: 30px;
+      margin: 0 1.5%;
+    }
+    .panel {
+      flex: 1;
+      padding: 15px 20px;
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .panel h2 {
+      color: #7c2d12;
+      margin-top: 0;
+    }
+
+    /* Form pseudo-classes */
+    input, select {
+      width: 90%;
+      padding: 6px;
+      margin: 4px 0 10px 0;
+      border: 2px solid #d6d3d1;
+      border-radius: 6px;
+    }
+    input:focus {
+      background-color: #fef9c3;
+      outline: none;
+    }
+    input:required {
+      border-left: 6px solid #f97316;
+    }
+    input:valid {
+      border-color: #16a34a;
+    }
+    input:invalid {
+      border-color: #dc2626;
+    }
+    button {
+      padding: 8px 20px;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(to right, #c2410c, #f59e0b);
+      box-shadow: 2px 2px 5px #78350f;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      background-color: #7c2d12;
+      color: #ffffff;
+      padding: 8px;
+    }
+    td {
+      padding: 8px;
+      text-align: center;
+    }
+    tr:nth-child(odd) {
+      background-color: #ffedd5;
+    }
+    tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+    tr:hover {
+      background-color: #fdba74;
+    }
+
+    footer {
+      margin-top: 25px;
+      padding: 12px;
+      text-align: center;
+      color: #ffffff;
+      background: linear-gradient(to right, #7c2d12, #c2410c);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>City Book Store</h1>
+    <p>Every page is a new journey</p>
+  </header>
+
+  <div class="main">
+    <!-- Categories -->
+    <div class="category">
+      <img src="images/fiction.svg" alt="Fiction books">
+      <h3>Fiction</h3>
+    </div>
+    <div class="category">
+      <img src="images/science.svg" alt="Science books">
+      <h3>Science</h3>
+    </div>
+    <div class="category">
+      <img src="images/kids.svg" alt="Kids books">
+      <h3>Kids</h3>
+    </div>
+
+    <!-- Offer box with border image -->
+    <div class="offer">
+      <strong>Book Fair Offer:</strong> Flat 20% off on all books this week!
+    </div>
+
+    <div class="row">
+      <!-- Price table -->
+      <div class="panel">
+        <h2>Best Sellers</h2>
+        <table>
+          <tr><th>Book</th><th>Author</th><th>Price</th></tr>
+          <tr><td>Wings of Fire</td><td>A. P. J. Abdul Kalam</td><td>Rs. 299</td></tr>
+          <tr><td>Ponniyin Selvan</td><td>Kalki</td><td>Rs. 650</td></tr>
+          <tr><td>Clean Code</td><td>Robert C. Martin</td><td>Rs. 899</td></tr>
+          <tr><td>The Alchemist</td><td>Paulo Coelho</td><td>Rs. 350</td></tr>
+        </table>
+      </div>
+
+      <!-- Membership form -->
+      <div class="panel">
+        <h2>Become a Member</h2>
+        <form>
+          <label>Name</label><br>
+          <input type="text" value="Viswanathan A R" required><br>
+          <label>Email</label><br>
+          <input type="email" value="viswa.mail" required><br>
+          <label>Favourite Category</label><br>
+          <select>
+            <option>Fiction</option>
+            <option>Science</option>
+            <option>Kids</option>
+          </select><br>
+          <button type="button">Join Now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 City Book Store | Viswanathan A R (URK24CS9061)
+  </footer>
+</body>
+</html>

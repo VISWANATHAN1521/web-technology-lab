@@ -1,0 +1,14 @@
+{
+  "name": "user-registration",
+  "version": "1.0.0",
+  "description": "Ex 10 - HTML form request handling using Node.js and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Viswanathan A R (URK24CS9061)",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.0.0"
+  }
+}
